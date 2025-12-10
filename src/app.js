@@ -1,6 +1,13 @@
 const express = require('express');
-
 const app = express();
+
+const dbReady = require('./middleware/dbReady');
+
+const recipeRoutes = require('./routes/recipeRoutes');
+
+app.use(express.json());
+
+app.use('/api/recipes', dbReady, recipeRoutes);
 
 app.get('/', (req, res) => res.json({ message: 'Simple REST API using Express.js' }));
 
