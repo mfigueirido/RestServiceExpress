@@ -6,12 +6,12 @@ const options = {
     info: { title: 'REST Service API', version: '1.0.0' },
     components: {
       securitySchemes: {
-        bearerAuth: { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }
-      }
+        bearerAuth: { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      },
     },
-    security: [{ bearerAuth: [] }]
+    security: [{ bearerAuth: [] }],
   },
-  apis: ['./src/routes/*.js', './src/controllers/*.js']
+  apis: ['./src/routes/*.js', './src/controllers/*.js'],
 };
 
 // Extend components with common schemas
@@ -21,8 +21,8 @@ options.definition.components.schemas = {
     properties: {
       id: { type: 'string' },
       name: { type: 'string' },
-      email: { type: 'string' }
-    }
+      email: { type: 'string' },
+    },
   },
   RegisterRequest: {
     type: 'object',
@@ -30,23 +30,23 @@ options.definition.components.schemas = {
     properties: {
       name: { type: 'string' },
       email: { type: 'string' },
-      password: { type: 'string' }
-    }
+      password: { type: 'string' },
+    },
   },
   LoginRequest: {
     type: 'object',
     required: ['email', 'password'],
     properties: {
       email: { type: 'string' },
-      password: { type: 'string' }
-    }
+      password: { type: 'string' },
+    },
   },
   AuthResponse: {
     type: 'object',
     properties: {
       token: { type: 'string' },
-      user: { $ref: '#/components/schemas/User' }
-    }
+      user: { $ref: '#/components/schemas/User' },
+    },
   },
   Recipe: {
     type: 'object',
@@ -56,7 +56,7 @@ options.definition.components.schemas = {
       difficulty: {
         type: 'string',
         enum: ['easy', 'medium', 'hard'],
-        example: 'medium'
+        example: 'medium',
       },
       prepTime: { type: 'number', example: 45 },
       ingredients: {
@@ -65,23 +65,23 @@ options.definition.components.schemas = {
           type: 'object',
           properties: {
             name: { type: 'string', example: 'arroz' },
-            quantity: { type: 'string', example: '300g' }
-          }
-        }
+            quantity: { type: 'string', example: '300g' },
+          },
+        },
       },
       steps: {
         type: 'array',
-        items: { type: 'string' }
+        items: { type: 'string' },
       },
       tags: {
         type: 'array',
-        items: { type: 'string' }
+        items: { type: 'string' },
       },
       author: { type: 'string', example: 'user123' },
       createdAt: {
         type: 'string',
         format: 'date-time',
-        example: '2024-01-15T10:30:00.000Z'
+        example: '2024-01-15T10:30:00.000Z',
       },
       ratings: {
         type: 'array',
@@ -90,11 +90,11 @@ options.definition.components.schemas = {
           properties: {
             userId: { type: 'string', example: 'user456' },
             score: { type: 'number', example: 5 },
-            comment: { type: 'string', example: 'Excelente!' }
-          }
-        }
-      }
-    }
+            comment: { type: 'string', example: 'Excelente!' },
+          },
+        },
+      },
+    },
   },
   CreateRecipeRequest: {
     type: 'object',
@@ -109,15 +109,15 @@ options.definition.components.schemas = {
           type: 'object',
           properties: {
             name: { type: 'string' },
-            quantity: { type: 'string' }
-          }
-        }
+            quantity: { type: 'string' },
+          },
+        },
       },
       steps: { type: 'array', items: { type: 'string' } },
       tags: { type: 'array', items: { type: 'string' } },
-      author: { type: 'string' }
-    }
-  }
+      author: { type: 'string' },
+    },
+  },
 };
 
 module.exports = swaggerJsdoc(options);
