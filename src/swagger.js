@@ -51,71 +51,71 @@ options.definition.components.schemas = {
   Recipe: {
     type: 'object',
     properties: {
-      _id: { type: 'string', example: '507f1f77bcf86cd799439011' },
-      name: { type: 'string', example: 'Paella de marisco' },
+      id: { type: 'string', example: '507f1f77bcf86cd799439011' },
+      name: { type: 'string', example: 'Potato omelet' },
       difficulty: {
         type: 'string',
         enum: ['easy', 'medium', 'hard'],
         example: 'medium',
       },
-      prepTime: { type: 'number', example: 45 },
+      prepTime: { type: 'number', example: 30, default: 1 },
       ingredients: {
         type: 'array',
         items: {
           type: 'object',
           properties: {
-            name: { type: 'string', example: 'arroz' },
-            quantity: { type: 'string', example: '300g' },
+            name: { type: 'string', example: 'Potato' },
+            quantity: { type: 'string', example: '500g' },
           },
         },
       },
       steps: {
         type: 'array',
-        items: { type: 'string' },
+        items: { type: 'string', example: 'Fry potatoes' },
       },
       tags: {
         type: 'array',
-        items: { type: 'string' },
+        items: { type: 'string', example: 'European dishes' },
       },
       author: { type: 'string', example: 'user123' },
       createdAt: {
         type: 'string',
         format: 'date-time',
-        example: '2024-01-15T10:30:00.000Z',
+        example: '2025-01-01T00:00:00.000Z',
       },
       ratings: {
         type: 'array',
         items: {
           type: 'object',
           properties: {
-            userId: { type: 'string', example: 'user456' },
+            userId: { type: 'string', example: 'user123' },
             score: { type: 'number', example: 5 },
-            comment: { type: 'string', example: 'Excelente!' },
+            comment: { type: 'string', example: 'Excellent!' },
           },
         },
       },
     },
   },
-  CreateRecipeRequest: {
+  RecipeRequest: {
     type: 'object',
     required: ['name', 'prepTime', 'ingredients', 'steps', 'author'],
     properties: {
-      name: { type: 'string' },
-      difficulty: { type: 'string', enum: ['easy', 'medium', 'hard'] },
-      prepTime: { type: 'number' },
+      name: { type: 'string', example: 'Potato omelet' },
+      difficulty: { type: 'string', enum: ['easy', 'medium', 'hard'], example: 'medium' },
+      prepTime: { type: 'number', example: 30, default: 1 },
       ingredients: {
         type: 'array',
         items: {
           type: 'object',
           properties: {
-            name: { type: 'string' },
-            quantity: { type: 'string' },
+            name: { type: 'string', example: 'Potato' },
+            quantity: { type: 'string', example: '500g' },
           },
         },
       },
-      steps: { type: 'array', items: { type: 'string' } },
-      tags: { type: 'array', items: { type: 'string' } },
-      author: { type: 'string' },
+      steps: { type: 'array', items: { type: 'string', example: 'Fry potatoes' } },
+      tags: { type: 'array', items: { type: 'string', example: 'European dishes' } },
+      author: { type: 'string', example: 'user123' },
     },
   },
 };
