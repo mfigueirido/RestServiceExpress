@@ -73,3 +73,27 @@ exports.addRating = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+exports.deleteRating = async (req, res) => {
+  try {
+    const { id, ratingId } = req.params;
+
+    const recipe = await Recipe.findById(id);
+    if (!recipe) {
+      return res.status(404).json({ error: 'Recipe not found' });
+    }
+
+    const ratingIndex = recipe.ratings.findIndex(rating => rating._id.toString() === ratingId);
+
+    if (ratingIndex === -1) {
+      return res.status(404).json({ error: 'Rating not found' });
+    }
+
+    recipe.ratings.splice(ratingIndex, 1);
+    await recipe.save();
+
+    res.json(recipe);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

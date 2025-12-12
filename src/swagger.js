@@ -118,6 +118,15 @@ options.definition.components.schemas = {
       author: { type: 'string', example: 'user123' },
     },
   },
+  RatingRequest: {
+    type: 'object',
+    required: ['userId', 'score'],
+    properties: {
+      userId: { type: 'string' },
+      score: { type: 'number', minimum: 1, maximum: 5 },
+      comment: { type: 'string', maxLength: 500 },
+    },
+  },
 };
 
 module.exports = swaggerJsdoc(options);

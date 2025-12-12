@@ -112,7 +112,63 @@ router.put('/:id', recipeController.updateRecipe);
  */
 router.delete('/:id', recipeController.deleteRecipe);
 
-// Route for adding a rating
+/**
+ * @openapi
+ * /api/recipes/{id}/ratings/:
+ *   post:
+ *     tags: [Recipe ratings]
+ *     summary: Create a new rating for a recipe
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RatingRequest'
+ *     responses:
+ *       201:
+ *         description: Recipe created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Recipe'
+ *       404:
+ *         description: Recipe or rating not found
+ */
 router.post('/:id/ratings', recipeController.addRating);
+
+/**
+ * @openapi
+ * /api/recipes/{id}/ratings/{ratingId}:
+ *   delete:
+ *     tags: [Recipe ratings]
+ *     summary: Delete a specific rating from a recipe
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: ratingId
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Rating deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Recipe'
+ *       404:
+ *         description: Recipe or rating not found
+ */
+router.delete('/:id/ratings/:ratingId', recipeController.deleteRating);
 
 module.exports = router;
