@@ -5,9 +5,12 @@ const dbReady = require('./middleware/dbReady');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
 
+const authRoutes = require('./routes/authRoutes');
 const recipeRoutes = require('./routes/recipeRoutes');
 
 app.use(express.json());
+
+app.use('/api/auth', dbReady, authRoutes);
 
 app.use('/api/recipes', dbReady, recipeRoutes);
 

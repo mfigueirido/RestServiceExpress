@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const recipeController = require('../controllers/recipeController');
 
+const auth = require('../middleware/auth');
+router.use(auth);
+
 // Basic CRUD routes
 
 /**
@@ -10,6 +13,8 @@ const recipeController = require('../controllers/recipeController');
  *   post:
  *     summary: Create a new recipe
  *     tags: [Recipes]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -32,6 +37,8 @@ router.post('/', recipeController.createRecipe);
  *   get:
  *     summary: Get all recipes
  *     tags: [Recipes]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: OK
@@ -48,6 +55,8 @@ router.get('/', recipeController.getAllRecipes);
  *   get:
  *     tags: [Recipes]
  *     summary: Get a recipe by id
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -72,6 +81,8 @@ router.get('/:id', recipeController.getRecipeById);
  *   put:
  *     tags: [Recipes]
  *     summary: Update a recipe
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -100,6 +111,8 @@ router.put('/:id', recipeController.updateRecipe);
  *   delete:
  *     tags: [Recipes]
  *     summary: Delete a recipe
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -112,12 +125,16 @@ router.put('/:id', recipeController.updateRecipe);
  */
 router.delete('/:id', recipeController.deleteRecipe);
 
+// Ratings routes
+
 /**
  * @openapi
  * /api/recipes/{id}/ratings/:
  *   post:
  *     tags: [Recipe ratings]
  *     summary: Create a new rating for a recipe
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -148,6 +165,8 @@ router.post('/:id/ratings', recipeController.addRating);
  *   delete:
  *     tags: [Recipe ratings]
  *     summary: Delete a specific rating from a recipe
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
