@@ -65,7 +65,14 @@ exports.addRating = async (req, res) => {
       return res.status(404).json({ error: 'Recipe not found' });
     }
 
-    recipe.ratings.push(req.body);
+    // Associate rating with authenticated user
+    const newRating = {
+      score: req.body.score,
+      comment: req.body.comment,
+      userId: req.user.id,
+    };
+
+    recipe.ratings.push(newRating);
     await recipe.save();
 
     res.json(recipe);
@@ -77,19 +84,26 @@ exports.addRating = async (req, res) => {
 exports.deleteRating = async (req, res) => {
   try {
     const { id, ratingId } = req.params;
+    const userId = req.user.id;
 
     const recipe = await Recipe.findById(id);
     if (!recipe) {
       return res.status(404).json({ error: 'Recipe not found' });
     }
 
-    const ratingIndex = recipe.ratings.findIndex(rating => rating._id.toString() === ratingId);
-
-    if (ratingIndex === -1) {
+    const rating = recipe.ratings.id(ratingId);
+    if (!rating) {
       return res.status(404).json({ error: 'Rating not found' });
     }
 
-    recipe.ratings.splice(ratingIndex, 1);
+    // Check if the rating belongs to the authenticated user
+    if (rating.userId !== userId) {
+      return res.status(403).json({
+        error: 'Forbidden: You can only delete your own ratings',
+      });
+    }
+
+    recipe.ratings.pull(ratingId);
     await recipe.save();
 
     res.json(recipe);

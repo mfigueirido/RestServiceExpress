@@ -57,6 +57,15 @@ const RecipeSchema = new mongoose.Schema(
         delete ret._id;
         delete ret.__v;
 
+        ret.ratings = ret.ratings.map(rating => {
+          const newRating = { ...rating };
+          if (newRating._id) {
+            newRating.id = newRating._id.toString();
+            delete newRating._id;
+          }
+          return newRating;
+        });
+
         if (ret.createdAt instanceof Date) {
           ret.createdAt = ret.createdAt.toISOString();
         }

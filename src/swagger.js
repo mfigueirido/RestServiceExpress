@@ -122,7 +122,6 @@ options.definition.components.schemas = {
     type: 'object',
     required: ['userId', 'score'],
     properties: {
-      userId: { type: 'string' },
       score: { type: 'number', minimum: 1, maximum: 5 },
       comment: { type: 'string', maxLength: 500 },
     },

@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const auth = require('./middleware/auth');
 const errorHandler = require('./middleware/errorHandler');
 
 const dbReady = require('./middleware/dbReady');
@@ -34,7 +35,7 @@ app.use(limiter);
 
 // Routes
 app.use('/api/auth', dbReady, authRoutes);
-app.use('/api/recipes', dbReady, recipeRoutes);
+app.use('/api/recipes', dbReady, auth, recipeRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get('/', (req, res) => res.json({ message: 'Simple REST API using Express.js' }));
 
