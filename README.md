@@ -48,10 +48,12 @@ npm start
 docker-compose up
 ```
 
-The API will be available at https://localhost:3000.
+The API will be available at https://localhost:3000 by default.
 
 > It will fallback to `http` if no certificates are found matching the paths specified in the `.env` file.
 You can generate an PFX certificate in Windows by using the `./scripts/generate-local-pfx.ps1` PowerShell script.
+
+> You can also change the port in your `.env` file.
 
 ## API Documentation
 
