@@ -17,7 +17,7 @@ REST API for managing recipes built with Node.js, Express and MongoDB. This proj
 ### Prerequisites
 
 - Node.js (v18+) and npm
-- MongoDB (optional, if missing fallbacks to in-memory datatabase)
+- MongoDB (optional, if missing falls back to in-memory database)
 - Docker Desktop (optional)
 
 ### 1. Clone & Install
