@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,8 @@
   "homepage": "https://github.com/mfigueirido/RestServiceExpress#readme",
   "devDependencies": {
     "eslint": "^9.39.1",
+    "jest": "^30.2.0",
+    "jest-environment-node": "^30.2.0",
     "nodemon": "^3.1.11",
     "prettier": "^3.7.4"
   },
