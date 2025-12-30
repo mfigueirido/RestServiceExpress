@@ -11,6 +11,7 @@ REST API for managing recipes built with Node.js, Express and MongoDB. This proj
 - **MongoDB with Mongoose ODM** - Schema-based data modeling
 - **Full Docker Support** - Complete containerization (API + MongoDB)
 - **Structured Logging & Request Tracing** - Debugging and monitoring ready
+- **Unit testing** - Jest unit tests
 
 ## Quick Start
 
@@ -37,6 +38,9 @@ npm install
 ```bash
 # Development (with auto-reload)
 npm run dev
+
+# Run unit tests
+npm run test
 
 # Production
 npm start
