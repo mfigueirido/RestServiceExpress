@@ -13,6 +13,7 @@ const dbReady = require('./middleware/dbReady');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
 
+const healthRoutes = require('./routes/healthRoutes');
 const authRoutes = require('./routes/authRoutes');
 const recipeRoutes = require('./routes/recipeRoutes');
 
@@ -34,6 +35,7 @@ const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 200 });
 app.use(limiter);
 
 // Routes
+app.use('/health', healthRoutes);
 app.use('/api/auth', dbReady, authRoutes);
 app.use('/api/recipes', dbReady, auth, recipeRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
